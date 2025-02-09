@@ -1,6 +1,7 @@
 package com.relocation.buddy.controller;
 
 import com.relocation.buddy.service.IHomeService;
+import com.relocation.buddy.service.impl.HomeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
