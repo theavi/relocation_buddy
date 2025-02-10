@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/avinash")
+@RequestMapping("/login")
 public class LoginController {
 
-    @GetMapping("/v1/avi")
+    @GetMapping("/v1/login")
     @ResponseBody
     public String login() {
         System.out.println("Avinash is handeling ...");
         return "login";
     }
 
-    @GetMapping("/v1/amol")
+    @GetMapping("/v1/logout")
     @ResponseBody
     public String logout() {
         System.out.println("Amol is handelling ...");
