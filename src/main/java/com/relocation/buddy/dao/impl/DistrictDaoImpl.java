@@ -1,0 +1,23 @@
+package com.relocation.buddy.dao.impl;
+
+import com.relocation.buddy.dao.IDistrictDao;
+import com.relocation.buddy.entity.District;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class DistrictDaoImpl implements IDistrictDao {
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    @Override
+    public String save(District district) {
+        System.out.println("Ball cathc kela");
+        Session session = sessionFactory.getCurrentSession();
+        session.save(district);
+        return "Record Save Succesfully";
+    }
+}
