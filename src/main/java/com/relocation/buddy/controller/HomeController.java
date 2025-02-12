@@ -15,18 +15,10 @@ public class HomeController {
     @Autowired
     private IHomeService homeService;
 
-    @GetMapping("/v1/test")
-    @ResponseBody
+    @GetMapping
     public String homeV1() {
         System.out.println("HTTP GET home initiated V1");
-        homeService.home();
-        return "home V1";
+        return "home";
     }
 
-    @GetMapping("/v2/test")
-    @ResponseBody
-    public String homeV2() {
-        System.out.println("HTTP GET home initiated V2");
-        return "home V2";
-    }
 }
