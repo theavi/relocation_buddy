@@ -18,6 +18,7 @@ public class DistrictDaoImpl implements IDistrictDao {
         System.out.println("Ball cathc kela");
         Session session = sessionFactory.getCurrentSession();
         session.save(district);
+        session.close();
         return "Record Save Succesfully";
     }
 }
