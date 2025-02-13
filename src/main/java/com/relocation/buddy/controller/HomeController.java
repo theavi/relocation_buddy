@@ -16,8 +16,8 @@ public class HomeController {
     private IHomeService homeService;
 
     @GetMapping
-    public String homeV1() {
-        System.out.println("HTTP GET home initiated V1");
+    public String home() {
+        System.out.println("HTTP GET home initiated");
         return "home";
     }
 
