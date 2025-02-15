@@ -13,4 +13,14 @@ public class TehsilMapper {
         tehsil.setCreatedDate(new Date());
         return tehsil;
     }
+    public static TehsilDto toDto(Tehsil tehsil){
+        TehsilDto tehsilDto = new TehsilDto();
+        tehsilDto.setName(tehsil.getName());
+        tehsilDto.setId(tehsil.getId());
+        tehsilDto.setCreatedBy(tehsil.getCreatedBy());
+        tehsilDto.setCreatedDate(tehsil.getCreatedDate());
+        tehsilDto.setModifiedBy(tehsil.getModifiedBy());
+        tehsilDto.setModifiedDate(tehsil.getModifiedDate());
+        return tehsilDto;
+    }
 }

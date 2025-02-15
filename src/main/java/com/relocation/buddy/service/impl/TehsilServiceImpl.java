@@ -17,7 +17,8 @@ public class TehsilServiceImpl implements ITehsilService {
     public TehsilDto create(TehsilDto dto) {
         System.out.println("im in service");
         Tehsil tehsil = TehsilMapper.toEntity(dto);
-        iTehsilDao.create(tehsil);
-        return null;
+        Tehsil saveTehsil = iTehsilDao.create(tehsil);
+        TehsilDto tehsilDto = TehsilMapper.toDto(saveTehsil);
+        return tehsilDto;
     }
 }

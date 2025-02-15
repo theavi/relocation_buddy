@@ -18,10 +18,9 @@ public class TehsilController {
 
     @PostMapping("/create")
     @ResponseBody
-    public String create(@RequestBody TehsilDto dto) {
+    public TehsilDto create(@RequestBody TehsilDto dto) {
         System.out.println("HTTP post initiated for create Tehsil");
-        iTehsilService.create(dto);
-        return "Tehsil";
+        return iTehsilService.create(dto);
     }
 
 }

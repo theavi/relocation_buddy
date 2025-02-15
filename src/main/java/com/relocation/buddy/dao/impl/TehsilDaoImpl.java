@@ -15,8 +15,10 @@ public class TehsilDaoImpl implements ITehsilDao {
     @Override
     public Tehsil create(Tehsil tehsil) {
         System.out.println("im in dao");
-        Session session=sessionFactory.getCurrentSession();
-        session.save(tehsil);
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        Integer id = (Integer) session.save(tehsil);
+        tehsil.setId(id);
+        session.close();
+        return tehsil;
     }
 }
