@@ -2,6 +2,8 @@ package com.relocation.buddy.service.impl;
 
 import com.relocation.buddy.dao.IDistrictDao;
 import com.relocation.buddy.dto.DistrictDto;
+import com.relocation.buddy.entity.District;
+import com.relocation.buddy.mapper.DistrictMapper;
 import com.relocation.buddy.service.IDistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,8 @@ public class DistrictServiceImpl implements IDistrictService {
     @Override
     public String createDistrict(DistrictDto dto) {
         System.out.println("Create District Service Called");
-//        String msg = dao.save(dto.getName());
+        District district = DistrictMapper.ToEntity(dto);
+        String msg = dao.save(district);
 //        return msg;
         return "Record Save Succes";
     }
