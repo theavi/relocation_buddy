@@ -5,10 +5,8 @@ import com.relocation.buddy.service.IDistrictService;
 import com.relocation.buddy.service.impl.DistrictServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/district")
@@ -16,8 +14,15 @@ public class DistrictController {
     @Autowired
     private IDistrictService districtService;
 
+    @GetMapping("/create")
+    public String create(Model model){
+        System.out.println("HTTP GET Initiated for create District");
+        model.addAttribute("path","/district/createDistrict");
+        model.addAttribute("fragment","createDistrict");
+     return "default";
+    }
+
     @PostMapping("/create")
-    @ResponseBody
     public String create(@RequestBody DistrictDto dto){
         System.out.println("HTTP GET Initiated for create District");
         return districtService.createDistrict(dto);

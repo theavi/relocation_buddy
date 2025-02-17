@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="/common/header :: header">
+</head>
+<body>
+<div class="container">
+    <div th:replace="/common/header :: navbar"></div>
+    <div th:replace="${path} :: ${fragment}"></div><br/>
+    <div th:replace="/common/footer :: footer"></div>
+</div>
+</body>
+</html>
