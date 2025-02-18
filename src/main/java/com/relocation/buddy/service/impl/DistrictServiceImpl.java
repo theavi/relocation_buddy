@@ -17,8 +17,6 @@ public class DistrictServiceImpl implements IDistrictService {
     public String createDistrict(DistrictDto dto) {
         System.out.println("Create District Service Called");
         District district = DistrictMapper.ToEntity(dto);
-        String msg = dao.save(district);
-//        return msg;
-        return "Record Save Succes";
+        return dao.save(district);
     }
 }
