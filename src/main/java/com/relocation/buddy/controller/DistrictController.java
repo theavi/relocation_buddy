@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/district")
+@RequestMapping("/v1/district")
 public class DistrictController {
     @Autowired
     private IDistrictService districtService;
@@ -32,6 +32,14 @@ public class DistrictController {
         model.addAttribute("districtObject",new DistrictDto());
         model.addAttribute("path", "/district/createDistrict");
         model.addAttribute("fragment", "createDistrict");
+        return "default";
+    }
+
+    @GetMapping("/list")
+    public String list(Model model){
+        System.out.println("HTTP GET initiated for list District");
+        model.addAttribute("path", "/district/listDistrict");
+        model.addAttribute("fragment", "listDistrictTbl");
         return "default";
     }
 }
