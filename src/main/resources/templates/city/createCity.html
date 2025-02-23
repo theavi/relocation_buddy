@@ -1,9 +1,9 @@
-<div th:fragment="createDistrict">
-    <form method="post" th:action="@{/v1/district/create}" th:object="${districtObject}">
+<div th:fragment="createCity">
+    <form method="post" th:action="@{/city/create}" th:object="${cityObject}">
         <div class="row">
             <div class="col-md-4"></div>
-            <div class="col-md-4"><label for="districtName">District Name</label>
-                <input class="form-control" id="districtName" placeholder="Enter district name" th:field="*{name}"
+            <div class="col-md-4"><label for="cityName">City Name</label>
+                <input class="form-control" id="cityName" placeholder="Enter city name" th:field="*{name}"
                        type="text"></div>
             <div class="col-md-4"></div>
         </div>
