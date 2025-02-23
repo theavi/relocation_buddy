@@ -2,24 +2,44 @@ package com.relocation.buddy.controller;
 
 import com.relocation.buddy.dto.DistrictDto;
 import com.relocation.buddy.service.IDistrictService;
-import com.relocation.buddy.service.impl.DistrictServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/district")
+@RequestMapping("/v1/district")
 public class DistrictController {
     @Autowired
     private IDistrictService districtService;
 
-    @PostMapping("/create")
-    @ResponseBody
-    public String create(@RequestBody DistrictDto dto){
+    @GetMapping("/create")
+    public String create(Model model) {
         System.out.println("HTTP GET Initiated for create District");
-        return districtService.createDistrict(dto);
+        model.addAttribute("districtObject",new DistrictDto());
+        model.addAttribute("path", "/district/createDistrict");
+        model.addAttribute("fragment", "createDistrict");
+        return "default";
+    }
+
+    @PostMapping("/create")
+    public String create(@ModelAttribute("districtObject") DistrictDto dto, Model model) {
+        System.out.println("HTTP POST Initiated for create District");
+        String message = districtService.createDistrict(dto);
+        model.addAttribute("districtObject",new DistrictDto());
+        model.addAttribute("path", "/district/createDistrict");
+        model.addAttribute("fragment", "createDistrict");
+        return "default";
+    }
+
+    @GetMapping("/list")
+    public String list(Model model){
+        System.out.println("HTTP GET initiated for list District");
+        model.addAttribute("path", "/district/listDistrict");
+        model.addAttribute("fragment", "listDistrictTbl");
+        return "default";
     }
 }

@@ -9,17 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/login")
 public class LoginController {
 
-    @GetMapping("/v1/login")
-    @ResponseBody
+    @GetMapping
     public String login() {
-        System.out.println("Avinash is handeling ...");
+        System.out.println("HTTP GET for Login");
         return "login";
-    }
-
-    @GetMapping("/v1/logout")
-    @ResponseBody
-    public String logout() {
-        System.out.println("Amol is handelling ...");
-        return "logout";
     }
 }
