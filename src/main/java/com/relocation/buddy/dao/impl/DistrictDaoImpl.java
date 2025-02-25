@@ -21,4 +21,5 @@ public class DistrictDaoImpl implements IDistrictDao {
         session.close();
         return "Record Save Succesfully";
     }
+
 }

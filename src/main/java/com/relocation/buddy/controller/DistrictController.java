@@ -35,9 +35,9 @@ public class DistrictController {
         return "default";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public String list(Model model){
-        System.out.println("HTTP GET initiated for list District");
+        System.out.println("HTTlistP GET initiated for list District");
         model.addAttribute("path", "/district/listDistrict");
         model.addAttribute("fragment", "listDistrictTbl");
         return "default";
