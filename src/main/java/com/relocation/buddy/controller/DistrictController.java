@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/v1/district")
 public class DistrictController {
@@ -35,9 +37,11 @@ public class DistrictController {
         return "default";
     }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public String list(Model model){
         System.out.println("HTTlistP GET initiated for list District");
+        List<DistrictDto> list=districtService.list();
+        model.addAttribute("list",list);
         model.addAttribute("path", "/district/listDistrict");
         model.addAttribute("fragment", "listDistrictTbl");
         return "default";

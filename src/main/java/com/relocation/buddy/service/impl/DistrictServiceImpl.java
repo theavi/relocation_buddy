@@ -8,6 +8,9 @@ import com.relocation.buddy.service.IDistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class DistrictServiceImpl implements IDistrictService {
     @Autowired
@@ -18,5 +21,15 @@ public class DistrictServiceImpl implements IDistrictService {
         System.out.println("Create District Service Called");
         District district = DistrictMapper.ToEntity(dto);
         return dao.save(district);
+    }
+
+    @Override
+    public List<DistrictDto> list() {
+        List<District> list=dao.list();
+        List<DistrictDto> listDto=new ArrayList<>();
+        for (District district:list){
+            listDto.add(DistrictMapper.toDto(district));
+        }
+        return listDto;
     }
 }
