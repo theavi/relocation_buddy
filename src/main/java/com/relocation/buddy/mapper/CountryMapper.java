@@ -13,4 +13,10 @@ public class CountryMapper {
         country.setCreatedDate(new Date());
         return country;
     }
+
+    public static CountryDto toDto(Country entity){
+        CountryDto dto = new CountryDto();
+        dto.setName(entity.getName());
+        return dto;
+    }
 }

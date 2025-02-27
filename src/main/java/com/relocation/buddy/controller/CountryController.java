@@ -2,6 +2,7 @@ package com.relocation.buddy.controller;
 
 import com.relocation.buddy.dto.CityDto;
 import com.relocation.buddy.dto.CountryDto;
+import com.relocation.buddy.dto.DistrictDto;
 import com.relocation.buddy.service.ICityService;
 import com.relocation.buddy.service.ICountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/country")
@@ -40,8 +43,11 @@ public class CountryController {
     @GetMapping("/list")
     public String list(Model model){
         System.out.println("HTTP GET initiated for list Country");
+        List<CountryDto> list = iCountryService.list();
+        model.addAttribute("list",list);
         model.addAttribute("path", "/country/listCountry");
         model.addAttribute("fragment", "listCountryTbl");
         return "default";
     }
+
 }
