@@ -34,4 +34,11 @@ public class CityController {
         model.addAttribute("fragment", "createCity");
         return "default";
     }
+    @GetMapping("/list")
+    public String list(Model model){
+        System.out.println("HTTP GET initiated for list City");
+        model.addAttribute("path", "/city/listCity");
+        model.addAttribute("fragment", "listCityTbl");
+        return "default";
+    }
 }
