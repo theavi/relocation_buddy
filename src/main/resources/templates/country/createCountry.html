@@ -1,0 +1,18 @@
+<div th:fragment="createCountry">
+    <form method="post" th:action="@{/country/create}" th:object="${countryObject}">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"><label for="countryName">Country Name</label>
+                <input class="form-control" id="countryName" placeholder="Enter Country name" th:field="*{name}"
+                       type="text"></div>
+            <div class="col-md-4"></div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button class="btn btn-primary" type="submit">Create</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public class HomeDaoImpl implements IHomeDao {
     @Override
     public String home() {
-        System.out.println("I am in DAO");
+        System.out.println("I am in Home DAO");
         return "";
     }
 }
