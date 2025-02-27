@@ -14,7 +14,8 @@ public class CityServiceImpl implements ICityService {
     private ICityDao dao;
 
     @Override
-    public String create(CityDto dto) {
+    public String createCity(CityDto dto) {
+        System.out.println("Create City Service Called");
         City city = CityMapper.ToEntity(dto);
         return dao.save(city);
     }

@@ -13,4 +13,10 @@ public class DistrictMapper {
         district.setCreatedDate(new Date());
         return district;
     }
+
+    public static DistrictDto toDto(District entity){
+        DistrictDto dto=new DistrictDto();
+        dto.setName(entity.getName());
+        return dto;
+    }
 }

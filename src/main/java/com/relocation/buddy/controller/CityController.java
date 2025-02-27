@@ -28,7 +28,7 @@ public class CityController {
     @PostMapping("/create")
     public String create (@ModelAttribute("cityObject") CityDto dto, Model model){
         System.out.println("HTTP GET Initiated for create City");
-        iCityService.create(dto);
+        iCityService.createCity(dto);
         model.addAttribute("cityObject",new CityDto());
         model.addAttribute("path", "/city/createCity");
         model.addAttribute("fragment", "createCity");
