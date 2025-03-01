@@ -1,16 +1,23 @@
 <div th:fragment="listDistrictTbl">
-    <table class="table">
+    <table class="table table-striped" id="districtTbl" style="width:100%">
+        <caption>List of District</caption>
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">Index</th>
             <th scope="col">Name</th>
         </tr>
         </thead>
-        <tbody th:each="district : ${list}">
-        <tr>
-            <td th:text="${district.id}"></td>
+        <tbody>
+        <tr th:each="district,count : ${list}">
+            <td th:text="${count.index+1}"></td>
             <td th:text="${district.name}"></td>
         </tr>
         </tbody>
     </table>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Initialize DataTable
+            $('#districtTbl').DataTable();
+        });
+    </script>
 </div>
