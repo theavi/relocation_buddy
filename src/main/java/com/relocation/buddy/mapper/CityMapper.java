@@ -13,4 +13,9 @@ public class CityMapper {
         city.setCreatedDate(new Date());
         return city;
     }
+    public static CityDto toDto(City entity){
+        CityDto dto = new CityDto();
+        dto.setName(entity.getName());
+        return dto;
+    }
 }
