@@ -8,7 +8,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="district,count : ${list}">
+        <tr th:each="district , count : ${list}">
             <td th:text="${count.index+1}"></td>
             <td th:text="${district.name}"></td>
         </tr>
