@@ -1,11 +1,20 @@
 <div th:fragment="createDistrict">
-    <form method="post" th:action="@{/v1/district/create}" th:object="${districtObject}">
+    <form class="needs-validation" method="post" novalidate th:action="@{/v1/district/create}"
+          th:object="${districtObject}">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"><label for="districtName">District Name</label>
-                <input class="form-control" id="districtName" placeholder="Enter district name" th:field="*{name}"
-                       type="text"></div>
-            <div class="col-md-4"></div>
+            <div class="col-md-4"><label for="districtName">District #</label></div>
+            <div class="col-md-4"><input class="form-control" id="districtName" placeholder="Enter district name"
+                                         required th:field="*{name}" type="text">
+                <!--<div class="is-valid">
+                    Looks good!
+                </div>
+                <div class="is-invalid">
+                    Please enter District name!.
+                </div>-->
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+
         </div>
         <br/>
         <div class="row">
@@ -15,4 +24,22 @@
             </div>
         </div>
     </form>
+    <script>
+        $(document).ready(function(){
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+            form.classList.add('was-validated')
+            }, false)
+            })
+        });
+    </script>
 </div>
