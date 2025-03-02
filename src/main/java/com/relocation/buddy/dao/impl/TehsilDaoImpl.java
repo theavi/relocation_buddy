@@ -4,8 +4,11 @@ import com.relocation.buddy.dao.ITehsilDao;
 import com.relocation.buddy.entity.Tehsil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class TehsilDaoImpl implements ITehsilDao {
@@ -20,5 +23,15 @@ public class TehsilDaoImpl implements ITehsilDao {
         tehsil.setId(id);
         session.close();
         return tehsil;
+    }
+
+    @Override
+    public List<Tehsil> list() {
+        String hql="from Tehsil";
+        Session session=sessionFactory.getCurrentSession();
+        Query query=session.createQuery(hql);
+        List<Tehsil> list= query.list();
+        session.close();
+        return list;
     }
 }

@@ -8,6 +8,9 @@ import com.relocation.buddy.service.ITehsilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TehsilServiceImpl implements ITehsilService {
     @Autowired
@@ -21,4 +24,16 @@ public class TehsilServiceImpl implements ITehsilService {
         TehsilDto tehsilDto = TehsilMapper.toDto(saveTehsil);
         return tehsilDto;
     }
+
+    @Override
+    public List<TehsilDto> list() {
+        List<TehsilDto> listDto=new ArrayList<>();
+        List<Tehsil> list=iTehsilDao.list();
+        for (Tehsil tehsil:list){
+            TehsilDto dto=TehsilMapper.toDto(tehsil);
+            listDto.add(dto);
+        }
+        return listDto;
+    }
+
 }
