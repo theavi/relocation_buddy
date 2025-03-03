@@ -1,0 +1,26 @@
+<div th:fragment="createRlbService">
+<form class="needs-validation" method="post" novalidate th:action="@{/service/create}"
+      th:object="${serviceObject}">
+    <div class="row">
+        <div class="col-md-4"><label for="serviceName">District #</label></div>
+        <div class="col-md-4"><input class="form-control" id="serviceName" placeholder="Enter service name"
+                                     required th:field="*{name}" type="text">
+            <!--<div class="is-valid">
+                Looks good!
+            </div>
+            <div class="is-invalid">
+                Please enter Service name!.
+            </div>-->
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </div>
+</form>
