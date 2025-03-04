@@ -16,7 +16,7 @@
                 <button class="btn btn-primary btn-sm" data-bs-target="#updateDistrictModal" data-bs-toggle="modal" type="button">
                     Update
                 </button>
-                <button class="btn btn-danger btn-sm " data-bs-target="#deleteDistrictModal" data-bs-toggle="modal" type="button">
+                <button id="deleteDistrictBtn" class="btn btn-danger btn-sm " data-bs-target="#deleteDistrictModal" data-bs-toggle="modal" type="button">
                     Delete
                 </button>
             </td>
@@ -66,8 +66,8 @@
                     <span>Are you sure?</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="deleteDistrictModelBtn" type="button" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>
@@ -79,6 +79,23 @@
         $(document).ready(function() {
             // Initialize DataTable
             $('#districtTbl').DataTable();
+
+            $('#deleteDistrictModelBtn').click(function(){
+                console.log("Delete District initiated");
+                var id =1;
+               $.ajax({
+                    url: '/district/delete/'+id,
+                    type: 'DELETE',
+                    success: function(result) {
+                     // Do something with the result
+                    },
+                    error: function(error){
+                         // Do something with the error
+                    }
+              });
+
+            });
+
         });
     </script>
 </div>
