@@ -17,6 +17,7 @@ public class DistrictMapper {
     public static DistrictDto toDto(District entity){
         DistrictDto dto=new DistrictDto();
         dto.setName(entity.getName());
+        dto.setId(entity.getId());
         return dto;
     }
 }

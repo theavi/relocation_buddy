@@ -3,6 +3,7 @@
         <caption>List of District</caption>
         <thead>
         <tr>
+            <th hidden="hidden" scope="col"></th>
             <th scope="col">Index</th>
             <th scope="col">Name</th>
             <th scope="col">Action</th>
@@ -10,13 +11,16 @@
         </thead>
         <tbody>
         <tr th:each="district , count : ${list}">
-            <td th:text="${count.index+1}"></td>
+            <td hidden="hidden" th:text="${district.id}"></td>
+            <td th:text="${count.index}"></td>
             <td th:text="${district.name}"></td>
             <td>
-                <button class="btn btn-primary btn-sm" data-bs-target="#updateDistrictModal" data-bs-toggle="modal" type="button">
+                <button class="btn btn-primary btn-sm" data-bs-target="#updateDistrictModal" data-bs-toggle="modal"
+                        id="updateDistrictBtn" type="button">
                     Update
                 </button>
-                <button id="deleteDistrictBtn" class="btn btn-danger btn-sm " data-bs-target="#deleteDistrictModal" data-bs-toggle="modal" type="button">
+                <button class="btn btn-danger btn-sm " data-bs-target="#deleteDistrictModal" data-bs-toggle="modal"
+                        id="deleteDistrictBtn" type="button">
                     Delete
                 </button>
             </td>
@@ -25,19 +29,21 @@
     </table>
 
     <!-- Update Modal -->
-    <div class="modal fade" id="updateDistrictModal" tabindex="-1" aria-labelledby="updateDistrictModalLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="updateDistrictModalLabel" class="modal fade" id="updateDistrictModal"
+         tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Update District </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
                     <form class="needs-validation" method="post" novalidate th:action="@{/v1/district/create}">
                         <div class="row">
                             <div class="col-md-4"><label for="districtName">District #</label></div>
-                            <div class="col-md-4"><input class="form-control" id="districtName" placeholder="Enter district name"
-                                                         required  type="text">
+                            <div class="col-md-4"><input class="form-control" id="districtName"
+                                                         placeholder="Enter district name"
+                                                         required type="text">
                                 <div class="valid-feedback">Valid.</div>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
@@ -46,8 +52,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Update</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-success" type="button">Update</button>
                 </div>
             </div>
         </div>
@@ -55,19 +61,20 @@
     <!-- Modal End-->
 
     <!-- Delete Modal -->
-    <div class="modal fade" id="deleteDistrictModal" tabindex="-1" aria-labelledby="deleteDistrictModalLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="deleteDistrictModalLabel" class="modal fade" id="deleteDistrictModal"
+         tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="deleteDistrictModalLabel">Delete District </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
                     <span>Are you sure?</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button id="deleteDistrictModelBtn" type="button" class="btn btn-danger">Delete</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+                    <button class="btn btn-danger" id="deleteDistrictModelBtn" type="button">Delete</button>
                 </div>
             </div>
         </div>
@@ -80,19 +87,28 @@
             // Initialize DataTable
             $('#districtTbl').DataTable();
 
-            $('#deleteDistrictModelBtn').click(function(){
+            $('#deleteDistrictBtn').click(function(){
                 console.log("Delete District initiated");
-                var id =1;
-               $.ajax({
-                    url: '/district/delete/'+id,
-                    type: 'DELETE',
-                    success: function(result) {
-                     // Do something with the result
-                    },
-                    error: function(error){
-                         // Do something with the error
-                    }
-              });
+                var row=$(this).closest('tr');  // current row
+                var id=row.find('td').eq(0).text(); // find column first
+                console.log('ID ',id);
+
+                $('#deleteDistrictModelBtn').click(function(){
+                    console.log('User confirmed to delete District');
+
+                    $.ajax({
+                        url: '/district/delete/'+id,
+                        type: 'DELETE',
+                        success : function(result){
+                            console.log("Record deleted");
+                        },
+                        error: function(xhr,status, message){
+                            console.log("Something went wrong");
+                        }
+                    })
+
+                })
+
 
             });
 
