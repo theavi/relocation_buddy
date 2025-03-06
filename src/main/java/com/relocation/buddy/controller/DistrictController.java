@@ -5,15 +5,12 @@ import com.relocation.buddy.service.IDistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/v1/district")
+@RequestMapping("/district")
 public class DistrictController {
     @Autowired
     private IDistrictService districtService;
@@ -21,7 +18,9 @@ public class DistrictController {
     @GetMapping("/create")
     public String create(Model model) {
         System.out.println("HTTP GET Initiated for create District");
-        model.addAttribute("districtObject",new DistrictDto());
+        model.addAttribute("districtObject", new DistrictDto());
+        List<DistrictDto> list = districtService.list();
+        model.addAttribute("list", list);
         model.addAttribute("path", "/district/createDistrict");
         model.addAttribute("fragment", "createDistrict");
         return "default";
@@ -31,19 +30,25 @@ public class DistrictController {
     public String create(@ModelAttribute("districtObject") DistrictDto dto, Model model) {
         System.out.println("HTTP POST Initiated for create District");
         String message = districtService.createDistrict(dto);
-        model.addAttribute("districtObject",new DistrictDto());
+        model.addAttribute("districtObject", new DistrictDto());
         model.addAttribute("path", "/district/createDistrict");
         model.addAttribute("fragment", "createDistrict");
         return "default";
     }
 
     @GetMapping("/list")
-    public String list(Model model){
-        System.out.println("HTTlistP GET initiated for list District");
-        List<DistrictDto> list=districtService.list();
-        model.addAttribute("list",list);
+    public String list(Model model) {
+        System.out.println("HTTP list GET initiated for list District");
+        List<DistrictDto> list = districtService.list();
+        model.addAttribute("list", list);
         model.addAttribute("path", "/district/listDistrict");
         model.addAttribute("fragment", "listDistrictTbl");
+        return "default";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+        System.out.println("HTTP DELETE initiated for District");
         return "default";
     }
 }
