@@ -32,4 +32,10 @@ public class DistrictServiceImpl implements IDistrictService {
         }
         return listDto;
     }
+
+    @Override
+    public Integer delete(Integer id) {
+        dao.delete(id);
+        return 0;
+    }
 }

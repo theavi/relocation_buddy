@@ -8,4 +8,6 @@ public interface IDistrictDao {
     public String save(District entity);
 
     public List<District> list();
+
+    public abstract Integer delete(Integer id);
 }

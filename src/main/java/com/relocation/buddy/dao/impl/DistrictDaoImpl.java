@@ -1,9 +1,8 @@
 package com.relocation.buddy.dao.impl;
 
 import com.relocation.buddy.dao.IDistrictDao;
-import com.relocation.buddy.dto.DistrictDto;
 import com.relocation.buddy.entity.District;
-import com.relocation.buddy.service.IDistrictService;
+import com.relocation.buddy.exception.RecordNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -33,5 +32,16 @@ public class DistrictDaoImpl implements IDistrictDao {
         List<District> districtList = query.list();
         session.close();
         return districtList;
+    }
+
+    @Override
+    public Integer delete(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        District isExist = session.get(District.class, id);
+        if (null == isExist) {
+            throw new RecordNotFoundException("District Not found with id " + id);
+        }
+        session.delete(isExist);
+        return isExist.getId();
     }
 }

@@ -5,7 +5,9 @@ import com.relocation.buddy.dto.DistrictDto;
 import java.util.List;
 
 public interface IDistrictService {
-    public String createDistrict(DistrictDto dto);
+    public abstract String createDistrict(DistrictDto dto);
 
-    public List<DistrictDto> list();
+    public abstract List<DistrictDto> list();
+
+    public abstract Integer delete(Integer id);
 }
