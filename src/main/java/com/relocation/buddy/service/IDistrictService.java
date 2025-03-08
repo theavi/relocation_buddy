@@ -9,5 +9,5 @@ public interface IDistrictService {
 
     public abstract List<DistrictDto> list();
 
-    public abstract Integer delete(Integer id);
+    public abstract void delete(Integer id);
 }

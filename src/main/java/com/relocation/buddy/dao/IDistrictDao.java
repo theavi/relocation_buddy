@@ -9,5 +9,5 @@ public interface IDistrictDao {
 
     public List<District> list();
 
-    public abstract Integer delete(Integer id);
+    public abstract void delete(Integer id);
 }
