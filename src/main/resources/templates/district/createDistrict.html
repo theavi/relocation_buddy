@@ -5,16 +5,9 @@
             <div class="col-md-4"><label for="districtName">District #</label></div>
             <div class="col-md-4"><input class="form-control" id="districtName" placeholder="Enter district name"
                                          required th:field="*{name}" type="text">
-                <!--<div class="is-valid">
-                    Looks good!
-                </div>
-                <div class="is-invalid">
-                    Please enter District name!.
-                </div>-->
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
-
         </div>
         <br/>
         <div class="row">
@@ -23,7 +16,8 @@
                 <button class="btn btn-primary" type="submit">Create</button>
             </div>
         </div>
-    </form>
+    </form></br>
+    <div th:replace="/district/listDistrict :: listDistrictTbl"></div>
     <script>
         $(document).ready(function(){
             'use strict'
