@@ -47,4 +47,16 @@ public class CityController {
         model.addAttribute("fragment", "listCityTbl");
         return "default";
     }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id, Model model) {
+        System.out.println("HTTP DELETE initiated for City");
+        iCityService.delete(id);
+        model.addAttribute("cityObject", new CityDto());
+        List<CityDto> list = iCityService.list();
+        model.addAttribute("list", list);
+        model.addAttribute("path", "/city/createDistrict");
+        model.addAttribute("fragment", "createDistrict");
+        return "default";
+    }
 }

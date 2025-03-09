@@ -12,7 +12,7 @@
         <tbody>
         <tr th:each="district , count : ${list}">
             <td hidden="hidden" th:text="${district.id}"></td>
-            <td th:text="${count.index}"></td>
+            <td th:text="${count.index+1}"></td>
             <td th:text="${district.name}"></td>
             <td>
                 <button class="btn btn-primary btn-sm" data-bs-target="#updateDistrictModal" data-bs-toggle="modal"
@@ -101,17 +101,16 @@
                         type: 'DELETE',
                         success : function(result){
                             console.log("Record deleted");
+                            location.href = "/district/create";
                         },
                         error: function(xhr,status, message){
                             console.log("Something went wrong");
+                            alert("District not Deleted");
                         }
                     })
-
                 })
-
-
             });
-
         });
     </script>
+    <script th:src="@{/js/district.js}"></script>
 </div>

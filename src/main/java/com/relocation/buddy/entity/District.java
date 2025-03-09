@@ -8,17 +8,17 @@ import jakarta.persistence.Id;
 @Entity
 public class District extends BaseEntity {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @jakarta.persistence.Id
-    private Integer Id;
+    private Integer id;
     private String name;
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

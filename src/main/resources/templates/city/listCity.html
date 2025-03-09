@@ -1,16 +1,116 @@
 <div th:fragment="listCityTbl">
-    <table class="table">
+    <table class="table table-striped" id="cityTbl" style="width:100%">
+        <caption>List of City</caption>
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th hidden="hidden" scope="col"></th>
+            <th scope="col">Index</th>
             <th scope="col">Name</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
-        <tbody th:each="country : ${list}">
-        <tr>
-            <td th:text="${country.id}"></td>
-            <td th:text="${country.name}"></td>
+        <tbody>
+        <tr th:each="city , count : ${list}">
+            <td hidden="hidden" th:text="${city.id}"></td>
+            <td th:text="${count.index+1}"></td>
+            <td th:text="${city.name}"></td>
+            <td>
+                <button class="btn btn-primary btn-sm" data-bs-target="#updateCityModal" data-bs-toggle="modal"
+                        id="updateCityBtn" type="button">
+                    Update
+                </button>
+                <button class="btn btn-danger btn-sm " data-bs-target="#deleteCityModal" data-bs-toggle="modal"
+                        id="deleteCityBtn" type="button">
+                    Delete
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>
+
+    <!-- Update Modal -->
+    <div aria-hidden="true" aria-labelledby="updateCityModalLabel" class="modal fade" id="updateCityModal"
+         tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update City </h5>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" method="post" novalidate th:action="@{/city/create}">
+                        <div class="row">
+                            <div class="col-md-4"><label for="cityName">City #</label></div>
+                            <div class="col-md-4"><input class="form-control" id="cityName"
+                                                         placeholder="Enter city name"
+                                                         required type="text">
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+                        <br/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-success" type="button">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End-->
+
+    <!-- Delete Modal -->
+    <div aria-hidden="true" aria-labelledby="deleteCityModalLabel" class="modal fade" id="deleteCityModal"
+         tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCityModalLabel">Delete City </h5>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <span>Are you sure?</span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+                    <button class="btn btn-danger" id="deleteCityModelBtn" type="button">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal End-->
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Initialize DataTable
+            $('#cityTbl').DataTable();
+
+            $('#deleteCityBtn').click(function(){
+                console.log("Delete City initiated");
+                var row=$(this).closest('tr');  // current row
+                var id=row.find('td').eq(0).text(); // find column first
+                console.log('ID ',id);
+
+                $('#deleteCityModelBtn').click(function(){
+                    console.log('User confirmed to delete City');
+
+                    $.ajax({
+                        url: '/city/delete/'+id,
+                        type: 'DELETE',
+                        success : function(result){
+                            console.log("Record deleted");
+                            location.href = "/city/create";
+                        },
+                        error: function(xhr,status, message){
+                            console.log("Something went wrong");
+                            alert("City not Deleted");
+                        }
+                    })
+                })
+            });
+        });
+    </script>
+    <script th:src="@{/js/city.js}"></script>
 </div>

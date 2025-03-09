@@ -14,22 +14,27 @@ import java.util.List;
 @Service
 public class DistrictServiceImpl implements IDistrictService {
     @Autowired
-    private IDistrictDao dao;
+    private IDistrictDao districtdao;
 
     @Override
     public String createDistrict(DistrictDto dto) {
         System.out.println("Create District Service Called");
         District district = DistrictMapper.ToEntity(dto);
-        return dao.save(district);
+        return districtdao.save(district);
     }
 
     @Override
     public List<DistrictDto> list() {
-        List<District> list=dao.list();
+        List<District> list= districtdao.list();
         List<DistrictDto> listDto=new ArrayList<>();
         for (District district:list){
             listDto.add(DistrictMapper.toDto(district));
         }
         return listDto;
+    }
+
+    @Override
+    public void delete(Integer id) {
+        districtdao.delete(id);
     }
 }

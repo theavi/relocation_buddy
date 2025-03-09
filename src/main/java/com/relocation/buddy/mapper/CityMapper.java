@@ -1,7 +1,9 @@
 package com.relocation.buddy.mapper;
 
 import com.relocation.buddy.dto.CityDto;
+import com.relocation.buddy.dto.DistrictDto;
 import com.relocation.buddy.entity.City;
+import com.relocation.buddy.entity.District;
 
 import java.util.Date;
 
@@ -16,6 +18,8 @@ public class CityMapper {
     public static CityDto toDto(City entity){
         CityDto dto = new CityDto();
         dto.setName(entity.getName());
+        dto.setId(entity.getId());
         return dto;
     }
+
 }

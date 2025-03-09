@@ -30,10 +30,7 @@ public class DistrictController {
     public String create(@ModelAttribute("districtObject") DistrictDto dto, Model model) {
         System.out.println("HTTP POST Initiated for create District");
         String message = districtService.createDistrict(dto);
-        model.addAttribute("districtObject", new DistrictDto());
-        model.addAttribute("path", "/district/createDistrict");
-        model.addAttribute("fragment", "createDistrict");
-        return "default";
+        return "redirect:/district/create";
     }
 
     @GetMapping("/list")
@@ -47,8 +44,14 @@ public class DistrictController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
+    public String delete(@PathVariable("id") Integer id, Model model) {
         System.out.println("HTTP DELETE initiated for District");
+        districtService.delete(id);
+        model.addAttribute("districtObject", new DistrictDto());
+        List<DistrictDto> list = districtService.list();
+        model.addAttribute("list", list);
+        model.addAttribute("path", "/district/createDistrict");
+        model.addAttribute("fragment", "createDistrict");
         return "default";
     }
 }

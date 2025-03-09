@@ -9,4 +9,7 @@ public interface ICityDao {
     public String save(City entity);
 
     public List<City> list();
+
+    public abstract void delete(Integer id);
+
 }
