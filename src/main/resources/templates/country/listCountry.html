@@ -1,0 +1,16 @@
+<div th:fragment="listCountryTbl">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+      </tr>
+      </thead>
+      <tbody th:each="country : ${list}">
+      <tr>
+        <td th:text="${country.id}"></td>
+        <td th:text="${country.name}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>

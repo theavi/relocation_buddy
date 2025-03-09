@@ -1,0 +1,18 @@
+<div th:fragment="createCity">
+    <form method="post" th:action="@{/city/create}" th:object="${cityObject}">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"><label for="cityName">City Name</label>
+                <input class="form-control" id="cityName" placeholder="Enter city name" th:field="*{name}"
+                       type="text"></div>
+            <div class="col-md-4"></div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button class="btn btn-primary" type="submit">Create</button>
+            </div>
+        </div>
+    </form>
+</div>
