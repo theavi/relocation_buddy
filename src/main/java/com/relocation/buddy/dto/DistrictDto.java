@@ -1,6 +1,6 @@
 package com.relocation.buddy.dto;
 
-public class DistrictDto {
+public class DistrictDto extends BaseDto {
     private Integer id;
     private String name;
 
