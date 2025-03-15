@@ -19,7 +19,7 @@
                         id="updateDistrictBtn" type="button">
                     Update
                 </button>
-                <button class="btn btn-danger btn-sm " data-bs-target="#deleteDistrictModal" data-bs-toggle="modal"
+                <button class="btn btn-danger btn-sm " data-bs-target="#deleteDistrictModal" data-bs-toggle="modal" th:onclick="deleteDistrict(this)"
                         id="deleteDistrictBtn" type="button">
                     Delete
                 </button>
@@ -82,14 +82,18 @@
 
 
     <script type="text/javascript">
+
         $(document).ready(function() {
             // Initialize DataTable
             $('#districtTbl').DataTable();
 
-            $('#deleteDistrictBtn').click(function(){
+
+        });
+
+        function deleteDistrict(obj){
                 console.log("Delete District initiated");
-                var row=$(this).closest('tr');  // current row
-                var id=row.find('td').eq(0).text(); // find column first
+                var row=obj.closest('tr');  // current row
+                var id=row.querySelectorAll('td')[0].textContent.trim(); // find column first
                 console.log('ID ',id);
 
                 $('#deleteDistrictModelBtn').click(function(){
@@ -108,8 +112,7 @@
                         }
                     })
                 })
-            });
-        });
+            }
     </script>
     <script th:src="@{/js/district.js}"></script>
 </div>
