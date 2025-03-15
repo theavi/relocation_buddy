@@ -42,13 +42,14 @@ public class DistrictServiceImpl implements IDistrictService {
 
     @Override
     public DistrictDto update(DistrictDto dto) {
-        District isExist = districtdao.findById(dto.getId());
+        throw new RecordNotFoundException("District not found with ID : " + dto.getId());
+      /*District isExist = districtdao.findById(dto.getId());
         if (null == isExist) {
             throw new RecordNotFoundException("District not found with ID : " + dto.getId());
         }
         District entity = DistrictMapper.toEntity(dto);
         entity.setModifiedDate(new Date());
         entity.setModifiedBy(1);
-        return DistrictMapper.toDto(districtdao.update(entity));
+        return DistrictMapper.toDto(districtdao.update(entity));*/
     }
 }
