@@ -7,4 +7,10 @@ import java.util.List;
 public interface ITehsilDao {
     public Tehsil create(Tehsil tehsil);
     public List<Tehsil> list();
+
+    public abstract void delete(Integer id);
+
+    public abstract Tehsil update(Tehsil district);
+
+    public abstract Tehsil findById(Integer id);
 }

@@ -3,21 +3,109 @@
         <caption>List of Tehsil</caption>
         <thead>
         <tr>
+            <th hidden="hidden" scope="col"></th>
             <th scope="col">Index</th>
             <th scope="col">Name</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="tehsil , count : ${list}">
+            <td hidden="hidden" th:text="${tehsil.id}"></td>
             <td th:text="${count.index+1}"></td>
             <td th:text="${tehsil.name}"></td>
+            <td>
+                <button class="btn btn-primary btn-sm" data-bs-target="#updateTehsilModal" data-bs-toggle="modal"
+                    id="updateTehsilBtn" type="button">
+                    Update</button>
+                <button class="btn btn-danger btn-sm " data-bs-target="#deleteTehsilModal" data-bs-toggle="modal"
+                    id="deleteTehsilBtn" type="button">
+                    Delete</button>
+            </td>
         </tr>
         </tbody>
     </table>
+
+    <!-- Update Modal -->
+    <div aria-hidden="true" aria-labelledby="updateTehsilModalLabel" class="modal fade" id="updateTehsilModal"
+         tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Tehsil </h5>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" method="post" novalidate th:action="@{/tehsil/create}">
+                        <div class="row">
+                            <div class="col-md-4"><label for="tehsilUpdateName">Tehsil</label></div>
+                            <div class="col-md-4"><input class="form-control" id="tehsilUpdateName"
+                                                         required type="text">
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+                        <br/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                    <button id="updateModelTehsilBtn" class="btn btn-success" type="button">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Update Modal End-->
+
+    <!-- Delete Modal -->
+    <div aria-hidden="true" aria-labelledby="deleteTehsilModalLabel" class="modal fade" id="deleteTehsilModal"
+         tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteTehsilModalLabel">Delete Tehsil </h5>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <span>Are you sure?</span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+                    <button class="btn btn-danger" id="deleteTehsilModelBtn" type="button">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal End-->
+
     <script type="text/javascript">
         $(document).ready(function() {
             // Initialize DataTable
-            $('#tehsilTbl').DataTable();
+            $('#districtTbl').DataTable();
+
+            $('#deleteTehsilBtn').click(function(){
+                console.log("Delete Tehsil initiated");
+                var row=$(this).closest('tr');  // current row
+                var id=row.find('td').eq(0).text(); // find column first
+                console.log('ID ',id);
+
+                $('#deleteDistrictModelBtn').click(function(){
+                    console.log('User confirmed to delete Tehsil');
+
+                    $.ajax({
+                        url: '/tehsil/delete/'+id,
+                        type: 'DELETE',
+                        success : function(result){
+                            console.log("Record deleted");
+                            location.href = "/tehsil/create";
+                        },
+                        error: function(xhr,status, message){
+                            console.log("Something went wrong");
+                            alert("Tehsil not Deleted");
+                        }
+                    })
+                })
+            });
         });
     </script>
 </div>

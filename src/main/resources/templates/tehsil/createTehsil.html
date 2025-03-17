@@ -1,11 +1,13 @@
 <div th:fragment="createTehsil">
-    <form method="post" th:action="@{/tehsil/create}" th:object="${tehsilObject}">
+    <form class="needs-validation" method="post" th:action="@{/tehsil/create}" th:object="${tehsilObject}">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"><label for="tehsilName">Tehsil Name</label>
+            <div class="col-md-4"><label for="tehsilName">Tehsil Name</label></div>
+                <div class="col-md-4">
                 <input class="form-control" id="tehsilName" placeholder="Enter tehsil name" th:field="*{name}"
-                       type="text"></div>
-            <div class="col-md-4"></div>
+                       type="text">
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
         </div>
         <br/>
         <div class="row">
@@ -15,4 +17,24 @@
             </div>
         </div>
     </form>
+    </br>
+    <div th:replace="/tehsil/listTehsil :: listTehsilTbl"></div>
+    <script>
+        $(document).ready(function(){
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+            form.classList.add('was-validated')
+            }, false)
+            })
+        });
+    </script>
 </div>

@@ -7,6 +7,7 @@ import java.util.List;
 public interface ITehsilService {
     public TehsilDto create(TehsilDto dto);
     public List<TehsilDto> list();
-
+    public abstract void delete(Integer id);
+    public abstract TehsilDto update(TehsilDto dto);
 
 }

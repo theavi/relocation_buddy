@@ -54,4 +54,11 @@ public class DistrictController {
         model.addAttribute("fragment", "createDistrict");
         return "default";
     }
+
+    @PutMapping("/update")
+    @ResponseBody
+    public DistrictDto update(@RequestBody DistrictDto dto) {
+        System.out.println("HTTP PUT initiated for District");
+        return districtService.update(dto);
+    }
 }
