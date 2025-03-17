@@ -1,6 +1,7 @@
 package com.relocation.buddy.controller;
 
 import com.relocation.buddy.dto.DistrictDto;
+import com.relocation.buddy.exception.RecordNotFoundException;
 import com.relocation.buddy.service.IDistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
