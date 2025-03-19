@@ -2,11 +2,13 @@ package com.relocation.buddy.mapper;
 
 import com.relocation.buddy.dto.DistrictDto;
 import com.relocation.buddy.entity.District;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
 public class DistrictMapper {
-    public static District toEntity(DistrictDto dto) {
+    public  District toEntity(DistrictDto dto) {
         District district = new District();
         district.setId(dto.getId());
         district.setName(dto.getName());
@@ -17,7 +19,7 @@ public class DistrictMapper {
         return district;
     }
 
-    public static DistrictDto toDto(District entity) {
+    public  DistrictDto toDto(District entity) {
         DistrictDto dto = new DistrictDto();
         dto.setName(entity.getName());
         dto.setId(entity.getId());

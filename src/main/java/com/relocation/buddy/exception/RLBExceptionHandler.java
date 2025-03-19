@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class RLBExceptionHandler {
 
     @ExceptionHandler(value = {NullPointerException.class, RecordNotFoundException.class})
-    public String handleDistrictException() {
+    public String handleDistrictException(NullPointerException nullPointerException, RecordNotFoundException recordNotFoundException) {
         System.out.println("Alternate action was taken ");
+
         return "Record deleted";
     }
 

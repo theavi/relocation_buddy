@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,10 +17,13 @@ public class DistrictServiceImpl implements IDistrictService {
     @Autowired
     private IDistrictDao districtdao;
 
+    @Autowired
+    private DistrictMapper districtMapper;
+
     @Override
     public String createDistrict(DistrictDto dto) {
         System.out.println("Create District Service Called");
-        District district = DistrictMapper.toEntity(dto);
+        District district = districtMapper.toEntity(dto);
         return districtdao.save(district);
     }
 
@@ -30,7 +32,7 @@ public class DistrictServiceImpl implements IDistrictService {
         List<District> list = districtdao.list();
         List<DistrictDto> listDto = new ArrayList<>();
         for (District district : list) {
-            listDto.add(DistrictMapper.toDto(district));
+            listDto.add(districtMapper.toDto(district));
         }
         return listDto;
     }
