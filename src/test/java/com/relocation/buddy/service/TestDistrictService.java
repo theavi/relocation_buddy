@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -33,16 +34,39 @@ public class TestDistrictService {
     @Test
     public void testDistrictList() {
         //Given
-        List<DistrictDto> list = Arrays.asList(new DistrictDto(1, "Palghar"), new DistrictDto(2, "Panvel"));
         List<District> entities = Arrays.asList(new District(1, "Palghar"), new District(2, "Panvel"));
 
         //When
         BDDMockito.when(iDistrictDao.list()).thenReturn(entities);
-        BDDMockito.when(districtMapper.toDto(new District(1, "Palghar"))).thenReturn(new DistrictDto(1, "palghar"));
+        //BDDMockito.when(districtMapper.toDto(new District(1, "Palghar"))).thenReturn(new DistrictDto(1, "palghar"));
         List<DistrictDto> result = districtService.list();
         //Then
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(2,result.size());
+        Assertions.assertEquals(2, result.size());
+    }
+
+    @Test
+    public void testCreateDistrict() {
+        //Given
+        DistrictDto input = new DistrictDto(1, "Palghar");
+        District district = new District(1, "Palghar");
+        //When
+        BDDMockito.when(districtMapper.toEntity(input)).thenReturn(district);
+        BDDMockito.when(iDistrictDao.save(district)).thenReturn("Record Save Succesfully");
+        String msg = districtService.createDistrict(input);
+        //Then
+        Assertions.assertNotNull(msg);
+        Assertions.assertEquals("Record Save Succesfully", msg);
+    }
+
+    @Test
+    public void testDeleteDistrict(){
+        //Given
+        Integer id=1;
+        //When
+        districtService.delete(id);
+        //Then
+        BDDMockito.verify(iDistrictDao, Mockito.times(1)).delete(id);
     }
 
 }
