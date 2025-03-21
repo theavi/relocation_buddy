@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,14 +45,13 @@ public class DistrictServiceImpl implements IDistrictService {
 
     @Override
     public DistrictDto update(DistrictDto dto) {
-        throw new RecordNotFoundException("District not found with ID : " + dto.getId());
-      /*District isExist = districtdao.findById(dto.getId());
+      District isExist = districtdao.findById(dto.getId());
         if (null == isExist) {
             throw new RecordNotFoundException("District not found with ID : " + dto.getId());
         }
-        District entity = DistrictMapper.toEntity(dto);
+        District entity = districtMapper.toEntity(dto);
         entity.setModifiedDate(new Date());
         entity.setModifiedBy(1);
-        return DistrictMapper.toDto(districtdao.update(entity));*/
+        return districtMapper.toDto(districtdao.update(entity));
     }
 }
