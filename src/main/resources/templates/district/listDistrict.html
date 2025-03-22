@@ -19,7 +19,7 @@
                         id="updateDistrictBtn" type="button">
                     Update
                 </button>
-                <button class="btn btn-danger btn-sm " data-bs-target="#deleteDistrictModal" data-bs-toggle="modal"
+                <button class="btn btn-danger btn-sm " data-bs-target="#deleteDistrictModal" data-bs-toggle="modal" th:onclick="deleteDistrict(this)"
                         id="deleteDistrictBtn" type="button">
                     Delete
                 </button>
@@ -40,9 +40,8 @@
                 <div class="modal-body">
                     <form class="needs-validation" method="post" novalidate th:action="@{/v1/district/create}">
                         <div class="row">
-                            <div class="col-md-4"><label for="districtName">District #</label></div>
-                            <div class="col-md-4"><input class="form-control" id="districtName"
-                                                         placeholder="Enter district name"
+                            <div class="col-md-4"><label for="districtUpdateName">District</label></div>
+                            <div class="col-md-4"><input class="form-control" id="districtUpdateName"
                                                          required type="text">
                                 <div class="valid-feedback">Valid.</div>
                                 <div class="invalid-feedback">Please fill out this field.</div>
@@ -53,7 +52,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
-                    <button class="btn btn-success" type="button">Update</button>
+                    <button id="updateModelDistrictBtn" class="btn btn-success" type="button">Update</button>
                 </div>
             </div>
         </div>
@@ -83,14 +82,18 @@
 
 
     <script type="text/javascript">
+
         $(document).ready(function() {
             // Initialize DataTable
             $('#districtTbl').DataTable();
 
-            $('#deleteDistrictBtn').click(function(){
+
+        });
+
+        function deleteDistrict(obj){
                 console.log("Delete District initiated");
-                var row=$(this).closest('tr');  // current row
-                var id=row.find('td').eq(0).text(); // find column first
+                var row=obj.closest('tr');  // current row
+                var id=row.querySelectorAll('td')[0].textContent.trim(); // find column first
                 console.log('ID ',id);
 
                 $('#deleteDistrictModelBtn').click(function(){
@@ -109,8 +112,7 @@
                         }
                     })
                 })
-            });
-        });
+            }
     </script>
     <script th:src="@{/js/district.js}"></script>
 </div>

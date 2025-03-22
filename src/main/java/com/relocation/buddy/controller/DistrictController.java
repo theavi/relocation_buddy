@@ -1,6 +1,7 @@
 package com.relocation.buddy.controller;
 
 import com.relocation.buddy.dto.DistrictDto;
+import com.relocation.buddy.exception.RecordNotFoundException;
 import com.relocation.buddy.service.IDistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,5 +54,12 @@ public class DistrictController {
         model.addAttribute("path", "/district/createDistrict");
         model.addAttribute("fragment", "createDistrict");
         return "default";
+    }
+
+    @PutMapping("/update")
+    @ResponseBody
+    public DistrictDto update(@RequestBody DistrictDto dto) {
+        System.out.println("HTTP PUT initiated for District");
+        return districtService.update(dto);
     }
 }

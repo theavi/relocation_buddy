@@ -10,4 +10,6 @@ public interface IDistrictService {
     public abstract List<DistrictDto> list();
 
     public abstract void delete(Integer id);
+
+    public abstract DistrictDto update(DistrictDto dto);
 }

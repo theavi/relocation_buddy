@@ -14,6 +14,9 @@ import java.util.List;
 
 @Repository
 public class DistrictDaoImpl implements IDistrictDao {
+
+    // private static final FIND_BY_ID="FROM District d WHERE d.id= :";
+
     @Autowired
     SessionFactory sessionFactory;
 
@@ -38,7 +41,7 @@ public class DistrictDaoImpl implements IDistrictDao {
     @Override
     public void delete(Integer id) {
         Session session = sessionFactory.getCurrentSession();
-        Transaction trx=session.beginTransaction();
+        Transaction trx = session.beginTransaction();
         District isExist = session.get(District.class, id);
         if (null == isExist) {
             throw new RecordNotFoundException("District Not found with id " + id);
@@ -46,5 +49,23 @@ public class DistrictDaoImpl implements IDistrictDao {
         session.delete(isExist);
         trx.commit();
         session.close();
+    }
+
+    @Override
+    public District update(District district) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.saveOrUpdate(district);
+        tx.commit();
+        session.close();
+        return district;
+    }
+
+    @Override
+    public District findById(Integer id) {
+        Session session = sessionFactory.openSession();
+        District isExist = session.get(District.class, id);
+        session.close();
+        return isExist;
     }
 }

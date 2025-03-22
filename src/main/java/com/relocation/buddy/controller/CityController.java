@@ -22,6 +22,7 @@ public class CityController {
         System.out.println("HTTP GET Initiated for create City");
 //        CityDto cityDto = new CityDto();
 //        cityDto.setName("Swaraj");
+        model.addAttribute("list", iCityService.list());
         model.addAttribute("cityObject",new CityDto());
         model.addAttribute("path", "/city/createCity");
         model.addAttribute("fragment", "createCity");
@@ -32,10 +33,7 @@ public class CityController {
     public String create (@ModelAttribute("cityObject") CityDto dto, Model model){
         System.out.println("HTTP GET Initiated for create City");
         iCityService.createCity(dto);
-        model.addAttribute("cityObject",new CityDto());
-        model.addAttribute("path", "/city/createCity");
-        model.addAttribute("fragment", "createCity");
-        return "default";
+        return "redirect:/city/create";
     }
 
     @GetMapping("/list")
